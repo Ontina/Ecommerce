@@ -1,39 +1,53 @@
 import React from 'react'
 import "./login.css"
 import Navbar from '../components/Navbar'
+import { toast } from 'react-toastify'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
+
+
 
 function Login() {
+  const navigate = useNavigate()
+
+  function handleLogin(e){
+    e.preventDefault()
+    let form = new FormData(e.currentTarget)
+
+    axios.post("http://localhost:8000/login/", form)
+    .then((res) => {
+      toast.success("login successful")
+      navigate("/")
+    })
+    .catch((err) =>{
+      if(err.response.data === "Invalid Credentials"){
+        toast.error("Invalid Credentials")
+      }else{
+        for(let key in err.response.data){
+          toast.error(`${key} ${err.response.data[key]}`)
+      }
+      }
+    })
+  }
+
   return (
     <div className="login">
       <Navbar />
       <div className="container">
-        <form>
-           <div className="row">
+        <form onSubmit={handleLogin} className="login w-50 m-auto ">
 
-           <div className="col-md-6">
-             <label htmlFor="" className="form-label">Firstname</label>
-             <input type="text" className="form-control" />
-            </div>
-
-            <div className="col-md-6">
-             <label htmlFor="" className="form-label">Lastname</label>
-             <input type="text" className="form-control" />
-            </div>
-
-           <div className="col-md-6">
+           <div className="my-2">
              <label htmlFor="" className="form-label">Email</label>
-             <input type="email" className="form-control" />
+             <input name="email" type="email" className="form-control" />
             </div>
 
-            <div className="col-md-6">
+            <div className="my-2">
              <label htmlFor="" className="form-label">Password</label>
-             <input type="password" className="form-control" />
+             <input name="password" type="password" className="form-control" />
             </div>
 
-            <button type='button' className="btn btn-secondary mt-4">Submit</button>
+            <button  className="btn btn-secondary w-100 ">Submit</button>
 
-
-          </div>
         </form>
       </div>
     </div>

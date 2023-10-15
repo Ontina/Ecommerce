@@ -20,7 +20,9 @@ function App() {
       <Route path="/*" element={ <NotFound/> } />
 
     </Routes>
-    <ToastContainer/>
+    <ToastContainer
+      position='top-center'
+    />
     </BrowserRouter>
   )
 }
