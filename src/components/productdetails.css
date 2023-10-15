@@ -1,0 +1,25 @@
+.productdetails .d-flex img{
+  width: 4rem;
+  height: 4rem;
+  object-fit: contain;
+}
+
+.productdetails .main{
+  width: 100%;
+  object-fit: contain;
+}
+
+.productdetails .title{
+  color: #febb41;
+}
+
+.productdetails input{
+  width: 2rem;
+  margin: 0 4px;
+}
+
+.popular img{
+ width: 100%;
+ height: 12rem;
+ object-fit: contain;
+}
